@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*
 """ 
-  @file dfrobot_multi_gas_sensor.py
-  @note dfrobot_multi_gas_sensor Class infrastructure, implementation of underlying methods
+  @file DFRobot_MultiGasSensor.py
+  @note DFRobot_MultiGasSensor Class infrastructure, implementation of underlying methods
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @licence     The MIT License (MIT)
   @author      [PengKaixing](kaixing.peng@dfrobot.com)
-  version  V0.1
-  date  2021-03-31
+  @version  V0.1
+  @date  2021-03-31
   @get from https://www.dfrobot.com
-  @url https://www.dfrobot.com
+  @url https://github.com/DFRobot/DFRobot_MultiGasSensor
 """
 import serial
 import time
@@ -37,8 +37,7 @@ def clear_buffer(buf,length):
     buf[i]=0
 
 
-class dfrobot_multi_gas_sensor(object):
-
+class DFRobot_MultiGasSensor(object):
   INITIATIVE    =    0x03
   PASSIVITY     =    0x04
   O2            =    0x05
@@ -564,10 +563,10 @@ class dfrobot_multi_gas_sensor(object):
 '''
   @brief An example of an i2c interface module
 '''
-class dfrobot_multi_gas_sensor_I2C(dfrobot_multi_gas_sensor):
+class DFRobot_MultiGasSensor_I2C(DFRobot_MultiGasSensor):
   def __init__(self ,bus ,addr):
     self.__addr = addr
-    super(dfrobot_multi_gas_sensor_I2C, self).__init__(bus,0)
+    super(DFRobot_MultiGasSensor_I2C, self).__init__(bus,0)
 
   '''
    *  @brief IIC在主动模式下调用此函数，用以判断数据线上有没有数据
@@ -629,11 +628,11 @@ class dfrobot_multi_gas_sensor_I2C(dfrobot_multi_gas_sensor):
 '''
   @brief An example of an UART interface module
 '''
-class dfrobot_multi_gas_sensor_UART(dfrobot_multi_gas_sensor):
+class DFRobot_MultiGasSensor_UART(DFRobot_MultiGasSensor):
   def __init__(self ,Baud):
     self.__Baud = Baud
     try:
-      super(dfrobot_multi_gas_sensor_UART, self).__init__(0,Baud)
+      super(DFRobot_MultiGasSensor_UART, self).__init__(0,Baud)
     except:
       print ("plese get root!")
     

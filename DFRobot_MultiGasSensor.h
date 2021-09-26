@@ -82,61 +82,61 @@ extern sAllDataAnalysis_t AllDataAnalysis;
 
 class DFRobot_GAS
 {
-public:
-  DFRobot_GAS(){};
-  ~DFRobot_GAS(){};
+  public:
+    //改变获取气体方式
+    typedef enum
+    {
+      INITIATIVE = 0x03,
+      PASSIVITY = 0x04
+    } eMethod_t;
 
-  //改变获取气体方式
-  typedef enum
-  {
-    INITIATIVE = 0x03,
-    PASSIVITY = 0x04
-  } eMethod_t;
+    //气体类型
+    typedef enum
+    {
+      O2 = 0x05,
+      CO = 0x04,
+      H2S = 0x03,
+      NO2 = 0x2C,
+      O3 = 0x2A,
+      CL2 = 0x31,
+      NH3 = 0x02,
+      H2 = 0x06,
+      HCL = 0X2E,
+      SO2 = 0X2B,
+      HF = 0x33,
+      _PH3 = 0x45
+    } eType_t;
 
-  //气体类型
-  typedef enum
-  {
-    O2 = 0x05,
-    CO = 0x04,
-    H2S = 0x03,
-    NO2 = 0x2C,
-    O3 = 0x2A,
-    CL2 = 0x31,
-    NH3 = 0x02,
-    H2 = 0x06,
-    HCL = 0X2E,
-    SO2 = 0X2B,
-    HF = 0x33,
-    _PH3 = 0x45
-  } eType_t;
+    //是否打开ALA报警功能
+    typedef enum
+    {
+      ON = 0x01,
+      OFF = 0x00
+    } eSwitch_t;
 
-  //是否打开ALA报警功能
-  typedef enum
-  {
-    ON = 0x01,
-    OFF = 0x00
-  } eSwitch_t;
+    typedef enum
+    {
+      TWENTY_FIVE = 0x01,
+      FIFTH = 0x02,
+      SEVENTY_FIVE = 0x03
+    } ePWM_t;
 
-  typedef enum
-  {
-    TWENTY_FIVE = 0x01,
-    FIFTH = 0x02,
-    SEVENTY_FIVE = 0x03
-  } ePWM_t;
+    typedef enum
+    {
+      LOW_THRESHOLD_ALA = 0x00,
+      HIGH_THRESHOLD_ALA = 0x01
+    } eALA_t;
 
-  typedef enum
-  {
-    LOW_THRESHOLD_ALA = 0x00,
-    HIGH_THRESHOLD_ALA = 0x01
-  } eALA_t;
-  /*!
+    DFRobot_GAS(void){};
+    ~DFRobot_GAS(void){};
+/*!
  *  @brief 父类初始化，在子类函数中会进行IIC或者UART初始化
  *
  *  @return status  ： init status
  *          true is ： init success
  *          false is： init error
  */
-  virtual bool begin(void) = 0;
+    virtual bool begin(void) = 0;
 
 /*!
  *  @brief 改变传感器采集到气体以后数据上报到主控的方式
@@ -146,16 +146,16 @@ public:
  *          true is ： change success
  *          false is： change fail
  */
-  bool changeAcquireMode(eMethod_t mode);
+    bool changeAcquireMode(eMethod_t mode);
 
-  /*!
+/*!
  *  @brief 获取传感器获取的气体浓度或者气体的类型，单位是PPM
  *  @return 如果数据传输正常，那么返回气体浓度
  *          否则，返回0.0
  */
-  float readGasConcentrationPPM();
+    float readGasConcentrationPPM(void);
 
-  /*!
+/*!
  *  @brief 获取传感器获取气体的类型
  *  @param 无
  *  @return 气体类型
@@ -172,29 +172,28 @@ public:
             HF = 0x0A,
             _PH3 = 0x0B
           通信失败返回0xff
- */
-  String queryGasType();
+*/
+    String queryGasType(void);
 /*!
  *  @brief 设置传感器报警的阈值
  *  @param switchof    ：设置是否打开报警
            ON          ：打开报警功能
            OFF         ：关闭报警功能
-           threshold   ：设置报警的阈值
-           
+           threshold   ：设置报警的阈值         
  *  @return status  ： init status
  *          true is ： init success
  *          false is： init error
  */
-  bool setThresholdAlarm(eSwitch_t switchof, uint16_t threshold, eALA_t alamethod, String gasType);
+    bool setThresholdAlarm(eSwitch_t switchof, uint16_t threshold, eALA_t alamethod, String gasType);
 
 /*!
  *  @brief 获取传感器的板载温度
  *  @param 无
  *  @return 以float类型返回当前板子的温度
  */
-      float readTempC(void);
+    float readTempC(void);
 
-  /*!
+/*!
  *  @brief 设置是否开启温度补偿，传感器在不同温度下的输出值会有差别，所以
            为了获取到的气体浓度更精确，在计算气体浓度的时候需要增加温度补偿
  *  @param tempswitch：
@@ -202,7 +201,7 @@ public:
            OFF         ：关闭温度补偿
  *  @return 无
  */
-  void setTempCompensation(eSwitch_t tempswitch);
+    void setTempCompensation(eSwitch_t tempswitch);
 
 /*!
  *  @brief 获取传感器气体浓度以原始电压输出，不同于直接读取传感器寄存器，这
@@ -210,29 +209,24 @@ public:
  *  @param  vopin：用来接收传感器探头原始电压输出的引脚
  *  @return 传感器气体浓度的原始电压输出
  */
-  float readVolatageData(uint8_t vopin);
+    float readVolatageData(uint8_t vopin);
 
 /*!
  *  @brief 将协议的数据进行打包以便于传输
- *  @param  pBuf：等待打包的数据
- *          len：数据包长度  
+ *  @param  等待打包的数据
+ *          pBuf：传入的数据包的指针
+ *  @param  数据包长度  
+ *          len：长度数值
  *  @return 打包好的数据
  */
-  sProtocol_t pack(uint8_t *pBuf, uint8_t len);
-
-/*!
- *  @brief 在不同的浓度特征点，输出占空比不同的PWM信号
- *  @param  无
- *  @return 无
- */
-  void setCustomizeIO(ePWM_t duty);
+    sProtocol_t pack(uint8_t *pBuf, uint8_t len);
 
 /*!
  *  @brief 获取传感器探头输出的电压（用来计算此时的气体浓度）
  *  @param  无
  *  @return 电压值
  */
-  float getSensorVoltage(void);
+    float getSensorVoltage(void);
 
 /*!
  *  @brief 在主动模式下调用此函数，用以判断数据线上有没有数据
@@ -241,7 +235,7 @@ public:
  *          true is ： success is Available
  *          false is： error is unavailable
  */
-  virtual bool dataIsAvailable(void) = 0;
+    virtual bool dataIsAvailable(void) = 0;
 
 /*!
  *  @brief 软件改变iic地址
@@ -249,39 +243,43 @@ public:
  *  @return true is ： 修改成功
  *          false is： 修改失败
  */
-  bool changeI2cAddrGroup(uint8_t group);
-
-protected:
+    bool changeI2cAddrGroup(uint8_t group);
+  protected:
 /*!
  *  @brief 向传感器的指定寄存器写入数据
- *  @param Reg ：需要写入的寄存器地址
- *         Data：等待写入寄存器的数据
- *         len ：等待写入的数据的长度
+ *  @param 需要写入的寄存器地址
+ *         Reg ：寄存器地址
+ *  @param 等待写入寄存器的数据
+ *         Data：数据指针
+ *  @param 等待写入的数据的长度
+ *         len ：数据长度
  *  @return 没有返回值
  */
-  virtual void writeData(uint8_t Reg, void *Data, uint8_t len) = 0;
+    virtual void writeData(uint8_t Reg, void *Data, uint8_t len) = 0;
 
 /*!
  *  @brief 从指定传感器中获取指定长度的数据
- *  @param INITIATIVE：传感器主动上报
- *         PASSIVITY ：主控发送请求，传感器才能上报数据
- *  @return status  ：init status
- *          true is ：init success
- *          false is：init error
+ *  @param 需要读取的寄存器地址
+ *         Reg ：寄存器地址
+ *  @param 等待读取寄存器的数据存入的位置
+ *         Data：数据指针
+ *  @param 等待读取的数据的长度
+ *         len ：数据长度
+ *  @return 真实读取到数据长度
  */
-  virtual int16_t readData(uint8_t Reg, uint8_t *Data, uint8_t len) = 0;
-
-private:
-  bool _tempswitch;
+    virtual int16_t readData(uint8_t Reg, uint8_t *Data, uint8_t len) = 0;
+  private:
+    bool _tempswitch;
 };
 
-class DFRobot_GAS_I2C : public DFRobot_GAS{
+class DFRobot_GAS_I2C : public DFRobot_GAS
+{
   public:
     DFRobot_GAS_I2C(TwoWire *pWire=&Wire,uint8_t addr=0x74);
-    ~DFRobot_GAS_I2C(){};
+    ~DFRobot_GAS_I2C(void){};
     bool begin(void);
     float setI2cAddr(uint8_t addr);
-    bool dataIsAvailable();
+    bool dataIsAvailable(void);
   protected:
     void writeData(uint8_t Reg ,void *Data ,uint8_t len);
     int16_t readData(uint8_t Reg ,uint8_t *Data ,uint8_t len);
@@ -291,12 +289,13 @@ class DFRobot_GAS_I2C : public DFRobot_GAS{
 };
 
 #if (!defined ARDUINO_ESP32_DEV) && (!defined __SAMD21G18A__)
-class DFRobot_GAS_SoftWareUart : public DFRobot_GAS{
+class DFRobot_GAS_SoftWareUart : public DFRobot_GAS
+{
   public:
     DFRobot_GAS_SoftWareUart(SoftwareSerial *psoftUart);
-    ~DFRobot_GAS_SoftWareUart(){};
+    ~DFRobot_GAS_SoftWareUart(void){};
     bool begin(void);
-    bool dataIsAvailable();
+    bool dataIsAvailable(void);
   protected:
     void writeData(uint8_t Reg ,void *Data ,uint8_t len);
     int16_t readData(uint8_t Reg ,uint8_t *Data ,uint8_t len);
@@ -308,15 +307,15 @@ class DFRobot_GAS_HardWareUart : public DFRobot_GAS
 {
   public:
     DFRobot_GAS_HardWareUart(HardwareSerial *phardUart);
-    ~DFRobot_GAS_HardWareUart(){};
+    ~DFRobot_GAS_HardWareUart(void){};
     bool begin(void);
   protected:
-    bool dataIsAvailable();
+    bool dataIsAvailable(void);
     void writeData(uint8_t Reg, void *Data, uint8_t len);
     int16_t readData(uint8_t Reg, uint8_t *Data, uint8_t len);
   private:
     HardwareSerial *_pharduart;
 };
-#endif
 
+#endif
 #endif

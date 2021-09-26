@@ -31,8 +31,7 @@ static void analysisAllData(void)
   float Con;
   if (AllData.check == FucCheckSum((uint8_t *)&AllData, 8))
   {
-    switch(AllData.gasconcentration_decimals)
-    {
+    switch(AllData.gasconcentration_decimals){
       case 0:
         AllDataAnalysis.gasconcentration = (AllData.gasconcentration_h << 8) + AllData.gasconcentration_l;
         break;
@@ -46,8 +45,7 @@ static void analysisAllData(void)
         break;
     }
     Con = AllDataAnalysis.gasconcentration;
-    switch (AllData.gastype)
-    {
+    switch (AllData.gastype){
       case DFRobot_GAS::O2:
         break;
       case DFRobot_GAS::CO:
@@ -137,8 +135,7 @@ static void analysisAllData(void)
       AllDataAnalysis.gasconcentration = Con;
     else
       AllDataAnalysis.gasconcentration = 0;
-    switch (AllData.gastype)
-    {
+    switch (AllData.gastype){
       case 0x05:
         AllDataAnalysis.gastype = "O2";
         break;
@@ -206,12 +203,9 @@ bool DFRobot_GAS::changeAcquireMode(eMethod_t mode)
   writeData(0, (uint8_t *)&_protocol, sizeof(_protocol));
   delay(100);
   readData(0,recvbuf,9);
-  if(recvbuf[2]==1)
-  {
+  if(recvbuf[2]==1){
     return true;
-  }
-  else
-  {
+  }else{
     return false;
   }
 }
@@ -228,13 +222,11 @@ float DFRobot_GAS::readGasConcentrationPPM()
   delay(100);
   readData(0, recvbuf, 9);
   float Con=0.0;
-  if(FucCheckSum(recvbuf,8) == recvbuf[8])
-  {
+  if(FucCheckSum(recvbuf,8) == recvbuf[8]){
     Con=((recvbuf[2]<<8)+recvbuf[3])*1.0;
     gastype = recvbuf[4];
     decimal_digits = recvbuf[5];
-    switch(decimal_digits)
-    {
+    switch(decimal_digits){
       case 1:
         Con *= 0.1;
         break;
@@ -246,8 +238,7 @@ float DFRobot_GAS::readGasConcentrationPPM()
     }
     if (_tempswitch == DFRobot_GAS::OFF)
       return Con;
-    switch (gastype)
-    {
+    switch (gastype){
       case DFRobot_GAS::O2:
         break;
       case DFRobot_GAS::CO:
@@ -333,9 +324,7 @@ float DFRobot_GAS::readGasConcentrationPPM()
       default:
         break;
     }
-  }
-  else
-  {
+  }else{
     Con = 0.0;
   }
   if (Con<0)
@@ -353,8 +342,7 @@ String DFRobot_GAS::queryGasType()
   writeData(0, (uint8_t *)&_protocol, sizeof(_protocol));
   delay(100);
   readData(0, recvbuf, 9);
-  if(FucCheckSum(recvbuf,8) == recvbuf[8])
-  {
+  if(FucCheckSum(recvbuf,8) == recvbuf[8]){
     switch(recvbuf[4]){
       case 0x05:
         return "O2";
@@ -396,9 +384,7 @@ String DFRobot_GAS::queryGasType()
         return "";
         break;
     }
-  }
-  else
-  {
+  }else{
     return "NO GAS";
   }
 }
@@ -613,8 +599,11 @@ int16_t DFRobot_GAS_SoftWareUart::readData(uint8_t Reg, uint8_t *Data, uint8_t l
     if (i>=8)
       return len;
   }
+  return 0;
 }
+
 #else
+
 DFRobot_GAS_HardWareUart::DFRobot_GAS_HardWareUart(HardwareSerial *phardUart)
 {
   this->_pharduart = phardUart;
@@ -665,5 +654,6 @@ int16_t DFRobot_GAS_HardWareUart::readData(uint8_t Reg, uint8_t *Data, uint8_t l
     if (i >= 8)
       return len;
   }
+  return 0;
 }
 #endif
