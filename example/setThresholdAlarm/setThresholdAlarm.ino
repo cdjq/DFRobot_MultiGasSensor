@@ -86,7 +86,7 @@ void setup() {
 /**
   设置传感器报警的阈值
 */
-  while (!gas.setThresholdAlarm(/*是否打开阈值报警*/ gas.ON, 200, gas.LOW_THRESHOLD_ALA,gas.queryGasType())
+  while (!gas.setThresholdAlarm(/*是否打开阈值报警*/ gas.ON, 200, gas.LOW_THRESHOLD_ALA,gas.queryGasType()))
   {
     Serial.println("Failed to open alarm!");
     delay(1000);

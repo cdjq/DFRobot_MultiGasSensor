@@ -210,7 +210,7 @@ bool DFRobot_GAS::changeAcquireMode(eMethod_t mode)
   }
 }
 
-float DFRobot_GAS::readGasConcentrationPPM()
+float DFRobot_GAS::readGasConcentrationPPM(void)
 {
   uint8_t buf[6] = {0};
   uint8_t recvbuf[9] = {0};
@@ -333,7 +333,7 @@ float DFRobot_GAS::readGasConcentrationPPM()
     return Con;
 }
 
-String DFRobot_GAS::queryGasType()
+String DFRobot_GAS::queryGasType(void)
 {
   uint8_t buf[6] = {0};
   uint8_t recvbuf[9] = {0};
@@ -487,7 +487,7 @@ DFRobot_GAS_I2C::DFRobot_GAS_I2C(TwoWire *pWire, uint8_t addr)
   this->_I2C_addr = addr;
 }
 
-bool DFRobot_GAS_I2C::begin()
+bool DFRobot_GAS_I2C::begin(void)
 {
   _pWire->begin();
   _pWire->beginTransmission(_I2C_addr);
@@ -502,7 +502,7 @@ float DFRobot_GAS_I2C::setI2cAddr(uint8_t addr)
   this->_I2C_addr = addr;
 }
 
-bool DFRobot_GAS_I2C::dataIsAvailable()
+bool DFRobot_GAS_I2C::dataIsAvailable(void)
 {
   uint8_t buf[6] = {0};
   uint8_t recvbuf[9] = {0};
@@ -555,13 +555,13 @@ DFRobot_GAS_SoftWareUart::DFRobot_GAS_SoftWareUart(SoftwareSerial *psoftUart)
   _psoftUart = psoftUart;
 }
 
-bool DFRobot_GAS_SoftWareUart::begin()
+bool DFRobot_GAS_SoftWareUart::begin(void)
 {
   _psoftUart->begin(9600);
   return true;
 }
 
-bool DFRobot_GAS_SoftWareUart::dataIsAvailable()
+bool DFRobot_GAS_SoftWareUart::dataIsAvailable(void)
 {
   uint8_t len =_psoftUart->available();
   if (len>0)
@@ -609,13 +609,13 @@ DFRobot_GAS_HardWareUart::DFRobot_GAS_HardWareUart(HardwareSerial *phardUart)
   this->_pharduart = phardUart;
 }
 
-bool DFRobot_GAS_HardWareUart::begin()
+bool DFRobot_GAS_HardWareUart::begin(void)
 {
   this->_pharduart->begin(9600);
   return true;
 }
 
-bool DFRobot_GAS_HardWareUart::dataIsAvailable()
+bool DFRobot_GAS_HardWareUart::dataIsAvailable(void)
 {
   uint8_t len = _pharduart->available();
   if (len > 0)

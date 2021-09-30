@@ -3,9 +3,11 @@ DFRobot's MultiGasSensor
 
 ## DFRobot_MultiGasSensor Library for Arduino
 ---------------------------------------------------------
-
+这是一个用于复杂环境中检测多种气体的传感器，支持O2 CO H2S 
+NO2 O3 CL2 NH3 H2 HCL SO2 HF PH3等气体。只需要硬件切换对应
+的探头就可以了。同时支持气体高阈值或者低阈值报警功能
 ## Product Link（链接到英文商城）
-
+SKU：SEN0502
 
 ## Table of Contents
 
