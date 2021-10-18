@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*
 '''
-  * @file  initiativereport.ino
-  * @brief �����������ϱ�ȫ������
-  * @n ʵ�鷽ʽ�� ��������ͨ���������������ӣ���¼
-  * @n ͨ�ŷ�ʽѡ�񣬲��뿪��SEL��0��IIC,1��UART
-  * �����         ���ڵ�ַ
+  @file  initiativereport.ino
+  @brief �����������ϱ�ȫ������
+  @n ʵ�鷽ʽ�� ��������ͨ���������������ӣ���¼
+  @n ͨ�ŷ�ʽѡ�񣬲��뿪��SEL��0��IIC,1��UART
+  �����         ���ڵ�ַ
   A0 A1�����ƽ    00    01    10    11
     1            0x60  0x61  0x62  0x63
     2            0x64  0x65  0x66  0x67
@@ -20,14 +20,14 @@
                 | 0  | 1  |    0x75
                 | 1  | 0  |    0x76
                 | 1  | 1  |    0x77   default i2c address    
-  * @n ʵ������ ���ڴ�ӡȫ������
-  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  * @licence     The MIT License (MIT)
-  * @author      PengKaixing(kaixing.peng@dfrobot.com)
-  * @version     V1.0
-  * @date        2021-03-28
-  * @get         from https://www.dfrobot.com
-  * @url         https://github.com/dfrobot/DFRobot_MultiGasSensor
+  @n ʵ������ ���ڴ�ӡȫ������
+  @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+  @licence     The MIT License (MIT)
+  @author      PengKaixing(kaixing.peng@dfrobot.com)
+  @version     V1.0
+  @date        2021-03-28
+  @get         from https://www.dfrobot.com
+  @url         https://github.com/dfrobot/DFRobot_MultiGasSensor
 '''
 
 import sys

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*
 '''
-  * @file  readGasConcentration.py
-  * @brief 获取当前传感器的浓度值以电压的形式输出
-  * @n 通信方式选择，拨码开关SEL：0：IIC,1：UART
-  * 组序号         组内地址
+  @file  read_volatage_data.py
+  @brief 获取当前传感器的浓度值以电压的形式输出
+  @n 通信方式选择，拨码开关SEL：0：IIC,1：UART
+  组序号         组内地址
   A0 A1拨码电平    00    01    10    11
     1            0x60  0x61  0x62  0x63
     2            0x64  0x65  0x66  0x67
@@ -19,15 +19,15 @@
                 | 0  | 1  |    0x75
                 | 1  | 0  |    0x76
                 | 1  | 1  |    0x77   default i2c address     
-  * @n 实验方式： 将传感器通信引脚与主控连接，烧录
-  * @n 实验现象： 在串口打印可以看到此时板子温度
-  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  * @licence     The MIT License (MIT)
-  * @author      PengKaixing(kaixing.peng@dfrobot.com)
-  * @version     V1.0
-  * @date        2021-03-28
-  * @get         from https://www.dfrobot.com
-  * @url         https://github.com/dfrobot/DFRobot_MultiGasSensor
+  @n 实验方式： 将传感器通信引脚与主控连接，烧录
+  @n 实验现象： 在串口打印可以看到此时板子温度
+  @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+  @licence     The MIT License (MIT)
+  @author      PengKaixing(kaixing.peng@dfrobot.com)
+  @version     V1.0
+  @date        2021-03-28
+  @get         from https://www.dfrobot.com
+  @url         https://github.com/dfrobot/DFRobot_MultiGasSensor
 '''
 import sys
 import os

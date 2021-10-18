@@ -161,17 +161,7 @@ Download the zip file first to use this library and uncompress it to a folder na
     @param  vopin：用来接收传感器探头原始电压输出的引脚
     @return 传感器气体浓度的原始电压输出
   '''
-  def read_volatage_data(self): 
-
-  '''!
-    @brief 在不同的浓度特征点，输出占空比不同的PWM信号
-    @param  duty:
-                 1:%25
-                 2:%50
-                 3:%75
-    @return 无
-  '''      
-  def set_customizeIO(self,duty):             
+  def read_volatage_data(self):          
 ```
 
 
