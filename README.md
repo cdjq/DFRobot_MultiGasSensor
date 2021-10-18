@@ -1,24 +1,28 @@
 # DFRobot_MultiGasSensor
-DFRobot's MultiGasSensor
+- [中文版](./README_CN.md)
 
 ## DFRobot_MultiGasSensor Library for Arduino
 ---------------------------------------------------------
-这是一个用于复杂环境中检测多种气体的传感器，支持O2 CO H2S 
-NO2 O3 CL2 NH3 H2 HCL SO2 HF PH3等气体。只需要硬件切换对应
-的探头就可以了。同时支持气体高阈值或者低阈值报警功能
-## Product Link（链接到英文商城）
+气体传感器广泛应用在气体研究，环境检测，生产安全监测，溶解气体分析，污染源/排放口规律研究，有毒有害，可燃气体检测报警，化验室或现场简单气体分析测试等方面，这款气体传感器更是集成了多种气体探头的一个多气体传感器，可以适用于各种各样的应用场景
+![正反面svg效果图](./resources/images/DFR0784svg1.png)
+
+## Product Link（链接到中文商城）
 SKU：SEN0502
 
 ## Table of Contents
 
+* [Summary](#summary)
 * [Installation](#installation)
 * [Methods](#methods)
 * [Compatibility](#compatibility)
 * [History](#history)
 * [Credits](#credits)
 
-<snippet>
-<content>
+## Summary
+
+这是一个用于复杂环境中检测多种气体的传感器，支持O2 CO H2S 
+NO2 O3 CL2 NH3 H2 HCL SO2 HF PH3等气体。只需要硬件切换对应
+的探头就可以了。同时支持气体高阈值或者低阈值报警功能
 
 ## Installation
 
@@ -177,9 +181,8 @@ FireBeetle-ESP8266|      √       |              |             |
 Mega2560  |      √       |             |            | 
 Arduino uno |       √      |             |            | 
 Leonardo  |      √       |              |             | 
-
-
-
+Micro：bit  |      √       |              |             | 
+M0  |      √       |              |             | 
 
 ## History
 

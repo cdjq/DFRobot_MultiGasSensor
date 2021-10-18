@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 '''
   * @file  change_sensor_iic_addr.py
-  * @brief 通过使用
+  * @brief 修改iic地址组
   * @n 实验方式： 将传感器通信引脚与主控连接，烧录
   * @n 通信方式选择，拨码开关SEL：0：IIC,1：UART
   * 组序号         组内地址
