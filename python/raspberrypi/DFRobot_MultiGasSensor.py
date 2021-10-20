@@ -3,11 +3,10 @@
   @file DFRobot_MultiGasSensor.py
   @note DFRobot_MultiGasSensor Class infrastructure, implementation of underlying methods
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  @licence     The MIT License (MIT)
+  @license     The MIT License (MIT)
   @author      [PengKaixing](kaixing.peng@dfrobot.com)
-  @version  V0.2
+  @version  V2.0
   @date  2021-03-31
-  @get from https://www.dfrobot.com
   @url https://github.com/DFRobot/DFRobot_MultiGasSensor
 """
 import serial
@@ -36,8 +35,8 @@ temp = 0.0
 def fuc_check_sum(i,ln):
   '''!
     @brief CRC校验函数
-    @param1 i  :CRC原始数据列表
-    @param2 ln :长度
+    @param i  CRC原始数据列表
+    @param ln 长度
     @return CRC校验值
   '''
   tempq=0
@@ -49,8 +48,8 @@ def fuc_check_sum(i,ln):
 def clear_buffer(buf,length):
   '''!
     @brief 列表数值置为0
-    @param1 buf:等待清空的列表
-    @param2 length :长度
+    @param buf 等待清空的列表
+    @param length 长度
   '''
   for i in range(0,length):
     buf[i]=0
@@ -219,8 +218,8 @@ class DFRobot_MultiGasSensor(object):
     '''!
       @brief 改变传感器采集到气体以后数据上报到主控的方式
       @param mode 模式选择
-      @n     INITIATIVE：传感器主动上报
-      @n     PASSIVITY ：主控发送请求，传感器才能上报数据
+      @n     INITIATIVE 传感器主动上报
+      @n     PASSIVITY 主控发送请求，传感器才能上报数据
       @return 返回改变气体模式是否成功
       @retval True   change success
       @retval False  change fail
@@ -411,11 +410,11 @@ class DFRobot_MultiGasSensor(object):
   def set_threshold_alarm(self,switchof,threshold,gasType):
     '''!
       @brief 设置传感器报警的阈值
-      @param1 switchof 设置是否打开报警
+      @param switchof 设置是否打开报警
       @n        ON    打开报警功能
       @n        OFF   关闭报警功能
-      @param2 threshold 设置报警的阈值
-      @param3 gasType 气体类型
+      @param threshold 设置报警的阈值
+      @param gasType 气体类型
       @return 设置阈值报警是否成功
       @retval True   change success
       @retval False  change fail
@@ -486,9 +485,9 @@ class DFRobot_MultiGasSensor(object):
     '''!
       @brief 设置是否开启温度补偿，传感器在不同温度下的输出值会有差别，所以
       @n     为了获取到的气体浓度更精确，在计算气体浓度的时候需要增加温度补偿
-      @param tempswitch：温度补偿开关
-                   ON  ：打开温度补偿
-                   OFF ：关闭温度补偿
+      @param tempswitch 温度补偿开关
+                   ON  打开温度补偿
+                   OFF 关闭温度补偿
     '''  
     tempSwitch = tempswitch
     temp = self.read_temp()
@@ -497,7 +496,7 @@ class DFRobot_MultiGasSensor(object):
     '''!
       @brief 获取传感器气体浓度以原始电压输出，不同于直接读取传感器寄存器，这
       @n     个函数主要用来检验读取的气体浓度是否准确
-      @param  vopin：用来接收传感器探头原始电压输出的引脚
+      @param  vopin 用来接收传感器探头原始电压输出的引脚
       @return 传感器气体浓度的原始电压输出
     '''
     clear_buffer(recvbuf,9)
@@ -521,7 +520,7 @@ class DFRobot_MultiGasSensor(object):
   def change_i2c_addr_group(self,group):
     '''!
       @brief 改变IIC地址组
-      @param  group：想要使传感器变成的组号
+      @param  group 想要使传感器变成的组号
     '''   
     global sendbuf
     global recvbuf
@@ -580,8 +579,8 @@ class DFRobot_MultiGasSensor_I2C(DFRobot_MultiGasSensor):
   def write_data(self, reg, data , length):
     '''
       @brief writes data to a register
-      @param1 reg register address
-      @param2 value written data
+      @param reg register address
+      @param value written data
     '''  
     while 1:
       try:
@@ -595,8 +594,8 @@ class DFRobot_MultiGasSensor_I2C(DFRobot_MultiGasSensor):
   def read_data(self, reg ,data,length):
     '''
       @brief read the data from the register
-      @param1 reg register address
-      @param2 value read data
+      @param reg register address
+      @param value read data
     '''
     try:
       rslt = self.i2cbus.read_i2c_block_data(self.__addr ,reg , length)

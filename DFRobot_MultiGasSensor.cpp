@@ -2,11 +2,10 @@
   * @file  DFRobot_MultiGasSensor.cpp
   * @brief 这是一个可以检测空气中气体浓度传感器的库的函数实现.cpp文件
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  * @licence     The MIT License (MIT)
+  * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
   * @version     V2.0
   * @date        2021-09-26
-  * @get         from https://www.dfrobot.com
   * @url         https://github.com/DFRobot/DFRobot_MultiGasSensor
 */
 #include "DFRobot_MultiGasSensor.h"

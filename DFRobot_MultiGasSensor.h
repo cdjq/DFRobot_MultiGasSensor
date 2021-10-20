@@ -2,11 +2,10 @@
   * @file  DFRobot_MultiGasSensor.h
   * @brief 这是一个可以检测空气中气体浓度传感器的库的头文件
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  * @licence     The MIT License (MIT)
+  * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
   * @version     V2.0
   * @date        2021-09-26
-  * @get         from https://www.dfrobot.com
   * @url         https://github.com/DFRobot/DFRobot_MultiGasSensor
 */
 #ifndef __DFRobot_GAS_H__
@@ -155,7 +154,7 @@ public:
   /**
    * @fn changeAcquireMode
    * @brief 改变获取传感器数据的方式
-   * @param mode ：模式选择
+   * @param mode 模式选择
    * @n     INITIATIVE 传感器主动上报数据
    * @n     PASSIVITY 需要主控这边向传感器请求数据
    * @return bool类型，表示设置是否成功
@@ -181,12 +180,12 @@ public:
   /**
    * @fn setThresholdAlarm
    * @brief 设置传感器报警的阈值
-   * @param1 switchof ：是否打开阈值报警开关
-   * @n            ON ：打开     
-   * @n           OFF ：关闭
-   * @param2 threshold ：开始报警的阈值大小
-   * @param3 alamethod ：设置传感器高阈值或者低阈值报警
-   * @param4 gasType   ：气体类型
+   * @param switchof 是否打开阈值报警开关
+   * @n            ON 打开     
+   * @n           OFF 关闭
+   * @param threshold 开始报警的阈值大小
+   * @param alamethod 设置传感器高阈值或者低阈值报警
+   * @param gasType   气体类型
    * @return bool类型，表示设置是否成功
    * @retval True 成功
    * @retval False 失败
@@ -204,9 +203,9 @@ public:
    * @fn setTempCompensation
    * @brief 设置是否开启温度补偿，传感器在不同温度下的输出值会有差别，所以为
    * @n     了获取到的气体浓度更精确，在计算气体浓度的时候需要增加温度补偿
-   * @param tempswitch ：是否打开温度补偿
-   * @n             ON ：打开温度补偿
-   * @n            OFF ：关闭温度补偿
+   * @param tempswitch 是否打开温度补偿
+   * @n             ON 打开温度补偿
+   * @n            OFF 关闭温度补偿
    */
   void setTempCompensation(eSwitch_t tempswitch);
 
@@ -214,7 +213,7 @@ public:
    * @fn readVolatageData
    * @brief 获取传感器气体浓度以原始电压输出，不同于直接读取传感器寄存器，这
    * @n     个函数主要用来检验读取的气体浓度是否准确
-   * @param vopin：用来接收传感器探头原始电压输出的引脚
+   * @param vopin 用来接收传感器探头原始电压输出的引脚
    * @return float类型，表示返回传感器气体浓度的原始电压输出
    */
   float readVolatageData(uint8_t vopin);
@@ -222,11 +221,11 @@ public:
   /**
    * @fn pack
    * @brief 将协议的数据进行打包以便于传输
-   * @param1 ：等待打包的数据
-   * @param2 ：数据包长度  
+   * @param pBuf 等待打包的数据
+   * @param pBuf 数据包长度  
    * @return sProtocol_t类型，表示返回打包好的数据
    */
-  sProtocol_t pack(uint8_t *pBuf, uint8_t len);
+  sProtocol_t pack(uint8_t *pBuf, uint8_t pBuf);
 
   /**
    * @fn getSensorVoltage
@@ -236,7 +235,7 @@ public:
   float getSensorVoltage(void);
 
   /**
-   * @fn begin
+   * @fn dataIsAvailable
    * @brief 在主动模式下调用此函数，用以判断数据线上有没有数据
    * @return bool类型，表示数据是否传感器有数据上传过来
    * @retval True 有数据上传
@@ -247,11 +246,11 @@ public:
   /**
    * @fn changeI2cAddrGroup
    * @brief 改变I2C地址组
-   * @param group ：地址组选择
+   * @param group 地址组选择
    * @return int类型，表示返回初始化的状态
    * @retval bool类型
-   * @retval True：修改成功
-   * @retval False：修改失败
+   * @retval True 修改成功
+   * @retval False 修改失败
    */
   bool changeI2cAddrGroup(uint8_t group);
 
@@ -259,18 +258,18 @@ protected:
   /**
    * @fn writeData
    * @brief 向传感器的指定寄存器写入数据
-   * @param1 Reg:需要写入的寄存器地址
-   * @param2 Data:等待写入寄存器的数据
-   * @param3 len:等待写入的数据的长度
+   * @param Reg 需要写入的寄存器地址
+   * @param Data 等待写入寄存器的数据
+   * @param len 等待写入的数据的长度
    */
   virtual void writeData(uint8_t Reg, void *Data, uint8_t len) = 0;
 
   /**
    * @fn readData
    * @brief 从指定传感器中获取指定长度的数据
-   * @param1 Reg:需要读取的寄存器地址
-   * @param2 Data:等待读取寄存器的数据存入的位置
-   * @param3 len:等待读取的数据的长度
+   * @param Reg 需要读取的寄存器地址
+   * @param Data 等待读取寄存器的数据存入的位置
+   * @param len 等待读取的数据的长度
    */
   virtual int16_t readData(uint8_t Reg, uint8_t *Data, uint8_t len) = 0;
 

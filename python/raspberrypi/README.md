@@ -7,7 +7,7 @@
 ![正反面svg效果图](./resources/images/DFR0784svg1.png)
 
 ## Product Link（链接到中文商城）
-SKU：SEN0502
+SKU：DFR0784
 
 ## Table of Contents
 
@@ -182,7 +182,7 @@ Download the zip file first to use this library and uncompress it to a folder na
 | Python3 |  √   |        |        |      |
 ## History
 
-- 02,04, 2021 - Version 0.2 released.
+- 02,04, 2021 - Version 2.0 released.
 
 
 ## Credits
