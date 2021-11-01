@@ -222,10 +222,10 @@ public:
    * @fn pack
    * @brief 将协议的数据进行打包以便于传输
    * @param pBuf 等待打包的数据
-   * @param pBuf 数据包长度  
+   * @param len 数据包长度  
    * @return sProtocol_t类型，表示返回打包好的数据
    */
-  sProtocol_t pack(uint8_t *pBuf, uint8_t pBuf);
+  sProtocol_t pack(uint8_t *pBuf, uint8_t len);
 
   /**
    * @fn getSensorVoltage
