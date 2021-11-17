@@ -1,6 +1,6 @@
 /*!
   * @file  DFRobot_MultiGasSensor.cpp
-  * @brief 这是一个可以检测空气中气体浓度传感器的库的函数实现.cpp文件
+  * @brief This is function implementation .cpp file of a library for the sensor that can detect gas concentration in the air.
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
@@ -480,7 +480,7 @@ bool DFRobot_GAS::changeI2cAddrGroup(uint8_t group)
   return recvbuf[2];
 }
 
-//IIC底层通信
+//I2C underlying communication
 DFRobot_GAS_I2C::DFRobot_GAS_I2C(TwoWire *pWire, uint8_t addr)
 {
   _pWire = pWire;
@@ -548,7 +548,7 @@ int16_t DFRobot_GAS_I2C::readData(uint8_t Reg,uint8_t *Data,uint8_t len)
   return len;
 }
 
-//UART底层通信
+//UART underlying communication
 #if (!defined ARDUINO_ESP32_DEV) && (!defined __SAMD21G18A__)
 DFRobot_GAS_SoftWareUart::DFRobot_GAS_SoftWareUart(SoftwareSerial *psoftUart)
 {
