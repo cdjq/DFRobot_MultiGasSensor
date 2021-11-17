@@ -1,6 +1,6 @@
 /*!
   * @file  DFRobot_MultiGasSensor.h
-  * @brief 这是一个可以检测空气中气体浓度传感器的库的头文件
+  * @brief This is a header file of the library for the sensor that can detect gas concentration in the air.
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
@@ -40,7 +40,7 @@
 
 /**
  * @struct sProtocol_t
- * @brief 通信用的数据协议包
+ * @brief Data protocol package for communication
  */
 typedef struct
 {
@@ -52,12 +52,12 @@ typedef struct
 
 /**
  * @struct sAllData_t
- * @brief 获取全部数据时用到的结构体
- * @note 这里从数据手册上抄写关于这个寄存器的描述
+ * @brief The struct used when getting all the data
+ * @note Copy the description about the register from datasheet.
  * @n --------------------------------------------------------------------------------------------------------
  * @n |  byte0   | byte1 |    byte2     |    byte3      |  byte4   |  byte5   |  byte6   |   byte7   |  byte8   
  * @n --------------------------------------------------------------------------------------------------------
- * @n |  协议头  | 命令  | 气体浓度高8位 | 气体浓度低8位 | 气体类型 | 小数位数 | 温度高8位 | 温度低8位 |  CRC
+ * @n |  Protocol Head  | Command  | Gas Concentrate High 8-bit | Gas Concentration Low 8-bit | Gas Type | Decimal Digits | Temperature High 8-bit | Temperature Low 8-bit |  CRC
  * @n --------------------------------------------------------------------------------------------------------
  */
 typedef struct
@@ -76,7 +76,7 @@ extern sAllData_t AllData;
 
 /**
  * @struct sAllDataAnalysis_t
- * @brief 解析完成的数据
+ * @brief All the data parsed
  */
 typedef struct
 {
@@ -91,7 +91,7 @@ class DFRobot_GAS
 public:
   /**
    * @enum eMethod_t
-   * @brief 传感器上传数据类型
+   * @brief The sensor upload data type
    */
   typedef enum
   {
@@ -101,7 +101,7 @@ public:
 
   /**
    * @enum eType_t
-   * @brief 气体类型
+   * @brief Gas Type
    */
   typedef enum
   {
@@ -121,7 +121,7 @@ public:
 
   /**
    * @enum eSwitch_t
-   * @brief 是否打开ALA报警功能
+   * @brief Whether to enable ALA alarm function
    */
   typedef enum
   {
@@ -131,7 +131,7 @@ public:
 
   /**
    * @enum eSwitch_t
-   * @brief 高低ALA报警功能
+   * @brief High and low ALA alarm function
    */
   typedef enum
   {
@@ -144,132 +144,132 @@ public:
 
   /**
    * @fn begin
-   * @brief 父类初始化，在子类函数中会进行IIC或者UART初始化
-   * @return bool类型，表示初始化是否成功
-   * @retval True 成功
-   * @retval False 失败
+   * @brief Parent class init, I2C or UART init is performed in subclass function
+   * @return bool type, indicating whether init succeed
+   * @retval True succeed
+   * @retval False failed
    */
   virtual bool begin(void) = 0;
 
   /**
    * @fn changeAcquireMode
-   * @brief 改变获取传感器数据的方式
-   * @param mode 模式选择
-   * @n     INITIATIVE 传感器主动上报数据
-   * @n     PASSIVITY 需要主控这边向传感器请求数据
-   * @return bool类型，表示设置是否成功
-   * @retval True 成功
-   * @retval False 失败
+   * @brief Change the mode of acquiring sensor data
+   * @param mode Mode select
+   * @n     INITIATIVE The sensor proactively reports data
+   * @n     PASSIVITY The main controller needs to request data from sensor
+   * @return bool type, indicating whether the setting is successful
+   * @retval True succeed
+   * @retval False failed
    */
   bool changeAcquireMode(eMethod_t mode);
 
   /**
    * @fn readGasConcentrationPPM
-   * @brief 获取传感器浓度，单位是PPM
-   * @return float类型，表示返回气体浓度，如果数据传输正常，那么返回气体浓度，否则，返回0.0
+   * @brief Get gas concentration from sensor, unit is PPM
+   * @return float type, indicating return gas concentration, if data is transmitted normally, return gas concentration, otherwise, return 0.0
    */
   float readGasConcentrationPPM(void);
 
   /**
    * @fn queryGasType
-   * @brief 查询气体类型
-   * @return String类型，表示返回气体类型字符串
+   * @brief Query gas type
+   * @return String type, indicating return gas type string
    */
   String queryGasType(void);
 
   /**
    * @fn setThresholdAlarm
-   * @brief 设置传感器报警的阈值
-   * @param switchof 是否打开阈值报警开关
-   * @n            ON 打开     
-   * @n           OFF 关闭
-   * @param threshold 开始报警的阈值大小
-   * @param alamethod 设置传感器高阈值或者低阈值报警
-   * @param gasType   气体类型
-   * @return bool类型，表示设置是否成功
-   * @retval True 成功
-   * @retval False 失败
+   * @brief Set sensor alarm threshold
+   * @param switchof Whether to turn on threshold alarm switch
+   * @n            ON turn on     
+   * @n           OFF turn off
+   * @param threshold The threshold for starting alarm
+   * @param alamethod Set sensor high or low threshold alarm
+   * @param gasType   Gas Type
+   * @return bool type, indicating whether the setting is successful
+   * @retval True succeed
+   * @retval False failed
    */
   bool setThresholdAlarm(eSwitch_t switchof, uint16_t threshold, eALA_t alamethod, String gasType);
 
   /**
    * @fn readTempC
-   * @brief 获取传感器的板载温度
-   * @return float类型，表示返回当前板子的温度
+   * @brief Get sensor onboard temperature
+   * @return float type, indicating return the current onboard temperature
    */
   float readTempC(void);
 
   /**
    * @fn setTempCompensation
-   * @brief 设置是否开启温度补偿，传感器在不同温度下的输出值会有差别，所以为
-   * @n     了获取到的气体浓度更精确，在计算气体浓度的时候需要增加温度补偿
-   * @param tempswitch 是否打开温度补偿
-   * @n             ON 打开温度补偿
-   * @n            OFF 关闭温度补偿
+   * @brief Set whether to turn on temperature compensation, values output by sensor under different temperatures have differences.
+   * @n     To get more accurate gas concentration, temperature compensation needs adding when calculating gas concentration.
+   * @param tempswitch Whether to turn on temperature compensation
+   * @n             ON Turn on temperature compensation
+   * @n            OFF Turn off temperature compensation
    */
   void setTempCompensation(eSwitch_t tempswitch);
 
   /**
    * @fn readVolatageData
-   * @brief 获取传感器气体浓度以原始电压输出，不同于直接读取传感器寄存器，这
-   * @n     个函数主要用来检验读取的气体浓度是否准确
-   * @param vopin 用来接收传感器探头原始电压输出的引脚
-   * @return float类型，表示返回传感器气体浓度的原始电压输出
+   * @brief Get sensor gas concentration output by original voltage, which is different from reading sensor register directly.
+   * @n     The function is mainly for detecting whether the read gas concentration is right.
+   * @param vopin Receive the pin output by sensor probe original voltage
+   * @return float type, indicating return the original voltage output sensor gas concentration
    */
   float readVolatageData(uint8_t vopin);
 
   /**
    * @fn pack
-   * @brief 将协议的数据进行打包以便于传输
-   * @param pBuf 等待打包的数据
-   * @param len 数据包长度  
-   * @return sProtocol_t类型，表示返回打包好的数据
+   * @brief Pack the protocol data for easy transmission
+   * @param pBuf Data to be packed
+   * @param len Length of data package  
+   * @return sProtocol_t type, indicating return the packed data
    */
   sProtocol_t pack(uint8_t *pBuf, uint8_t len);
 
   /**
    * @fn getSensorVoltage
-   * @brief 获取传感器探头输出的电压（用来计算此时的气体浓度）
-   * @return float类型，表示返回电压值
+   * @brief Get voltage output by sensor probe (for calculating the current gas concentration)
+   * @return float type, indicating return voltage
    */
   float getSensorVoltage(void);
 
   /**
    * @fn dataIsAvailable
-   * @brief 在主动模式下调用此函数，用以判断数据线上有没有数据
-   * @return bool类型，表示数据是否传感器有数据上传过来
-   * @retval True 有数据上传
-   * @retval False 无数据上传
+   * @brief Call this function in active mode to determine the presence of data on data line
+   * @return bool type, indicating whether the sensor has uploaded data
+   * @retval True Has uploaded data
+   * @retval False Not uploaded data
    */
   virtual bool dataIsAvailable(void) = 0;
 
   /**
    * @fn changeI2cAddrGroup
-   * @brief 改变I2C地址组
-   * @param group 地址组选择
-   * @return int类型，表示返回初始化的状态
-   * @retval bool类型
-   * @retval True 修改成功
-   * @retval False 修改失败
+   * @brief Change I2C address group
+   * @param group Address group select
+   * @return int type, indicating return init status
+   * @retval bool type
+   * @retval True Change succeed
+   * @retval False Change failed
    */
   bool changeI2cAddrGroup(uint8_t group);
 
 protected:
   /**
    * @fn writeData
-   * @brief 向传感器的指定寄存器写入数据
-   * @param Reg 需要写入的寄存器地址
-   * @param Data 等待写入寄存器的数据
-   * @param len 等待写入的数据的长度
+   * @brief Write data to the specified register of the sensor
+   * @param Reg Register address to be written
+   * @param Data Data to be written to register
+   * @param len Length of data to be written
    */
   virtual void writeData(uint8_t Reg, void *Data, uint8_t len) = 0;
 
   /**
    * @fn readData
-   * @brief 从指定传感器中获取指定长度的数据
-   * @param Reg 需要读取的寄存器地址
-   * @param Data 等待读取寄存器的数据存入的位置
-   * @param len 等待读取的数据的长度
+   * @brief Get the data with specified length from the specified sensor
+   * @param Reg Register address to be read
+   * @param Data Read the position storing register data
+   * @param len Length of the data to be written
    */
   virtual int16_t readData(uint8_t Reg, uint8_t *Data, uint8_t len) = 0;
 
