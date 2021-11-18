@@ -1,25 +1,25 @@
 /*!
   * @file  changeSensorI2CAddr.ino
-  * @brief 传感器主动上报全部数据，仅限iic通信使用这个demo
-  * @n 实验方式： 将传感器通信引脚与主控连接，烧录
-  * @n 通信方式选择，拨码开关SEL：0：IIC,1：UART
-  * @n 组序号         组内地址
-  * @n A0 A1拨码电平 00    01    10    11
+  * @brief The sensor proactively reports all the data, only i2c communication can use this demo.
+  * @n Experimental mode: connect sensor communication pin to the main controller and burn
+  * @n Communication mode select, dip switch SEL: 0: I2C, 1: UART
+  * @n Set serial number         address in the set
+  * @n A0 A1 DIP level 00    01    10    11
   * @n 1            0x60  0x61  0x62  0x63
   * @n 2            0x64  0x65  0x66  0x67
   * @n 3            0x68  0x69  0x6A  0x6B
   * @n 4            0x6C  0x6D  0x6E  0x6F
   * @n 5            0x70  0x71  0x72  0x73
-  * @n 6（默认地址组） 0x74  0x75  0x76  0x77（默认地址）
+  * @n 6 (Default address set) 0x74  0x75  0x76  0x77 (Default address)
   * @n 7            0x78  0x79  0x7A  0x7B
   * @n 8            0x7C  0x7D  0x7E  0x7F
-  * @n i2c 地址选择，默认i2c地址为0x77，A1、A0组合成4种IIC地址
+  * @n i2c address select, default i2c address is 0x77, A1 and A0 are grouped into 4 I2C addresses.
   * @n             | A0 | A1 |
   * @n             | 0  | 0  |    0x74
   * @n             | 0  | 1  |    0x75
   * @n             | 1  | 0  |    0x76
   * @n             | 1  | 1  |    0x77   default i2c address   
-  * @n 实验现象： 串口打印全部数据
+  * @n Experimental phenomenon: serial port will print all the data
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
@@ -46,7 +46,7 @@ void setup() {
   Serial.begin(115200);
   gas.setI2cAddr(scan());
 /**
-  传感器初始化，用作初始化串口或者初始化IIC，由此时使用的通信方式来决定
+  Sensor init, used to init serial port or I2C, depending on the communication mode currently used
 */
   while(!gas.begin())
   {
@@ -55,7 +55,7 @@ void setup() {
   }
 
 /**
-  修改iic地址组
+  Change i2c address set
 */
   while(gas.changeI2cAddrGroup(3)==0)
   {
