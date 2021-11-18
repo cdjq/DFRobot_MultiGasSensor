@@ -1,25 +1,25 @@
 /*!
   * @file  readGasConcentration.ino
-  * @brief 获取当前环境对应气体浓度以浓度值输出
-  * @n 实验方式： 将传感器通信引脚与主控连接，烧录
-  * @n 通信方式选择，拨码开关SEL：0：IIC,1：UART
-  * @n 组序号         组内地址
-  * @n A0 A1拨码电平 00    01    10    11
+  * @brief Obtain gas concentration corresponding to the current environment, output as concentration value
+  * @n Experimental mode: connect sensor communication pin to the main controller and burn
+  * @n Communication mode select, dip switch SEL: 0: I2C, 1: UART
+  * @n Set serial number         address in the set
+  * @n A0 A1 DIP level 00    01    10    11
   * @n 1            0x60  0x61  0x62  0x63
   * @n 2            0x64  0x65  0x66  0x67
   * @n 3            0x68  0x69  0x6A  0x6B
   * @n 4            0x6C  0x6D  0x6E  0x6F
   * @n 5            0x70  0x71  0x72  0x73
-  * @n 6（默认地址组） 0x74  0x75  0x76  0x77（默认地址）
+  * @n 6 (Default address set) 0x74  0x75  0x76  0x77 (Default address)
   * @n 7            0x78  0x79  0x7A  0x7B
   * @n 8            0x7C  0x7D  0x7E  0x7F
-  * @n i2c 地址选择，默认i2c地址为0x77，A1、A0组合成4种IIC地址
+  * @n i2c address select, default i2c address is 0x77, A1 and A0 are grouped into 4 I2C addresses.
   * @n             | A0 | A1 |
   * @n             | 0  | 0  |    0x74
   * @n             | 0  | 1  |    0x75
   * @n             | 1  | 0  |    0x76
   * @n             | 1  | 1  |    0x77   default i2c address  
-  * @n 实验现象： 在串口打印可以看到此时环境对应气体浓度值
+  * @n Experimental phenomenon: can see the corresponding gas concentration at the current environment through serial port  printing
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
@@ -29,7 +29,7 @@
   */
 #include "DFRobot_MultiGasSensor.h"
 
-//默认打开，此时使用IIC通信，屏蔽之后使用串口通信
+//Turn on by default, using I2C communication at the time, use serial port communication after turning off
 #define I2C_COMMUNICATION
 
 #ifdef  I2C_COMMUNICATION
@@ -54,12 +54,12 @@
 
 void setup() {
 /**
-  串口初始化，用作查看打印输出
+  Serial port init for viewing printing output
 */
   Serial.begin(115200);
 
 /**
-  传感器初始化，用作初始化串口或者初始化IIC，由此时使用的通信方式来决定
+  Sensor init, used to init serial port or I2C, depending on the communication mode currently used
 */
   while(!gas.begin())
   {
@@ -69,23 +69,23 @@ void setup() {
   Serial.println("The device is connected successfully!");
 
 /**
-  获取数据模式为：主控需要向传感器请求
+  Mode of obtaining data: the main controller needs to request the sensor for data
 */
   gas.changeAcquireMode(gas.PASSIVITY);
   delay(1000);
 
 /**
-  开启温度补偿:gas.ON : 开启
-               gas.OFF：关闭
+  Turn on temperature compensation: gas.ON : turn on
+               gas.OFF：turn off
 */
   gas.setTempCompensation(gas.ON);
 }
 
 void loop() {
 /**
-  在readGasConcentration()参数中填入需要获取的气体的类型，打印
-  此时气体浓度
-  每次延时1s打印
+  Fill in the parameter readGasConcentration() with the type of gas to be obtained and print
+  The current gas concentration
+  Print after 1s delay each time
 */
   Serial.print("Ambient ");
   Serial.print(gas.queryGasType());
