@@ -1,26 +1,26 @@
 /*!
   * @file  setThresholdAlarm.ino
-  * @brief 设置传感器的阈值报警
-  * @n 实验方式： 将传感器通信引脚与主控连接，烧录
-  * @n 通信方式选择，拨码开关SEL：0：IIC,1：UART
-  * @n 组序号         组内地址
-  * @n A0 A1拨码电平 00    01    10    11
+  * @brief Set sensor threshold alarm
+  * @n Experimental mode: connect sensor communication pin to the main controller and burn
+  * @n Communication mode select, dip switch SEL: 0: I2C, 1: UART
+  * @n Set serial number         address in the set
+  * @n A0 A1 DIP level 00    01    10    11
   * @n 1            0x60  0x61  0x62  0x63
   * @n 2            0x64  0x65  0x66  0x67
   * @n 3            0x68  0x69  0x6A  0x6B
   * @n 4            0x6C  0x6D  0x6E  0x6F
   * @n 5            0x70  0x71  0x72  0x73
-  * @n 6（默认地址组） 0x74  0x75  0x76  0x77（默认地址）
+  * @n 6 (Default address set) 0x74  0x75  0x76  0x77 (Default address)
   * @n 7            0x78  0x79  0x7A  0x7B
   * @n 8            0x7C  0x7D  0x7E  0x7F
-  * @n i2c 地址选择，默认i2c地址为0x77，A1、A0组合成4种IIC地址
+  * @n i2c address select, default i2c address is 0x77, A1 and A0 are grouped into 4 I2C addresses.
   * @n             | A0 | A1 |
   * @n             | 0  | 0  |    0x74
   * @n             | 0  | 1  |    0x75
   * @n             | 1  | 0  |    0x76
   * @n             | 1  | 1  |    0x77   default i2c address   
-  * @n 实验现象： 当传感器获取到的数据值超过设置的阈值之后，传感器的ALA引脚将输出
-                  高电平
+  * @n Experimental phenomenon: when the data obtained by sensor exceed the set threshold, the ALA pin of the sensor will output
+                  high level
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
@@ -30,7 +30,7 @@
 */
 #include "DFRobot_MultiGasSensor.h"
 
-//默认打开，此时使用IIC通信，屏蔽之后使用软串口通信
+//Turn on by default, using I2C communication at the time, use software serial port communication after turning off
 #define I2C_COMMUNICATION
 
 #ifdef  I2C_COMMUNICATION
@@ -54,18 +54,18 @@
 #endif
 
 /**
-  设置与报警引脚连接的主控引脚
+  Set the main controller pin connected to alarm pin
 */
 #define ALA_pin 3
 
 void setup() {
 /**
-  串口初始化，用作查看打印输出
+  Serial port init for viewing printing output
 */
   Serial.begin(115200);
   
 /**
-  传感器初始化，用作初始化串口或者初始化IIC，由此时使用的通信方式来决定
+  Sensor init, used to init serial port or I2C, depending on the communication mode currently used
 */
   while(!gas.begin())
   {
@@ -73,7 +73,7 @@ void setup() {
     delay(1000);
   }
 /**
-  获取数据模式为：主控需要向传感器请求
+  Mode of obtaining data: the main controller needs to request the sensor for data
 */
   while (!gas.changeAcquireMode(gas.PASSIVITY))
   {
@@ -83,9 +83,9 @@ void setup() {
 
 
 /**
-  设置传感器报警的阈值
+  Set sensor alarm threshold
 */
-  while (!gas.setThresholdAlarm(/*是否打开阈值报警*/ gas.ON, 200, gas.LOW_THRESHOLD_ALA,gas.queryGasType()))
+  while (!gas.setThresholdAlarm(/*Whether to enable threshold alarm*/ gas.ON, 200, gas.LOW_THRESHOLD_ALA,gas.queryGasType()))
   {
     Serial.println("Failed to open alarm!");
     delay(1000);
@@ -95,7 +95,7 @@ void setup() {
 
 void loop() {
 /**
-  循环获取环境气体浓度,到阈值则报警
+  Circularly obtain the ambient gas concentration and alarm is given when it reaches the threshold.
 */
   gas.readGasConcentrationPPM();
   if (digitalRead(ALA_pin) == 1)
