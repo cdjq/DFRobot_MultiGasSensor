@@ -2,7 +2,7 @@
   * @file  initiativeReport.ino
   * @brief The sensor proactively reports all the data
   * @n Experimental mode: connect sensor communication pin to the main controller and burn
-  * @n Communication mode select, dip switch SEL: 0: I2C, 1: UART
+  * @n Communication mode select, DIP switch SEL: 0: I2C, 1: UART
   * @n Set serial number         address in the set
   * @n A0 A1 DIP level 00    01    10    11
   * @n 1            0x60  0x61  0x62  0x63
@@ -19,7 +19,7 @@
   * @n             | 0  | 1  |    0x75
   * @n             | 1  | 0  |    0x76
   * @n             | 1  | 1  |    0x77   default i2c address    
-  * @n Experimental phenomenon: serial port will print all the data
+  * @n Experimental phenomenon: serial print all the data
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
@@ -29,7 +29,7 @@
 */
 #include "DFRobot_MultiGasSensor.h"
 
-//Turn on by default, using I2C communication at the time, use serial port communication after turning off
+//Turn on by default, using I2C communication at the time, switch to UART communication after turning off
 #define I2C_COMMUNICATION
 
 #ifdef I2C_COMMUNICATION
@@ -59,7 +59,7 @@ void setup() {
   Serial.begin(115200);
   
 /**
-  Sensor init, used to init serial port or I2C, depending on the communication mode currently used
+  Sensor init, init serial port or I2C, depending on the communication mode currently used
 */
   while(!gas.begin())
   {
