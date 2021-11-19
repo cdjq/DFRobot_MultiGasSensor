@@ -1,6 +1,6 @@
 /*!
   * @file  readTemp.ino
-  * @brief Get the board temperature of the current sensor
+  * @brief Get the current board temperature of the sensor
   * @n Experimental mode: connect sensor communication pin to the main controller and burn
   * @n Communication mode select, dip switch SEL: 0: I2C, 1: UART
   * @n Set serial number         address in the set
