@@ -2,8 +2,8 @@
   * @file  readTemp.ino
   * @brief Get the current board temperature of the sensor
   * @n Experimental mode: connect sensor communication pin to the main controller and burn
-  * @n Communication mode select, dip switch SEL: 0: I2C, 1: UART
-  * @n Set serial number         address in the set
+  * @n Communication mode select, DIP switch SEL: 0: I2C, 1: UART
+  * @n Set serial number         Address in the set
   * @n A0 A1 DIP level 00    01    10    11
   * @n 1            0x60  0x61  0x62  0x63
   * @n 2            0x64  0x65  0x66  0x67
@@ -13,13 +13,13 @@
   * @n 6 (Default address set) 0x74  0x75  0x76  0x77 (Default address)
   * @n 7            0x78  0x79  0x7A  0x7B
   * @n 8            0x7C  0x7D  0x7E  0x7F
-  * @n i2c address select, default i2c address is 0x77, A1 and A0 are grouped into 4 I2C addresses.
+  * @n i2c address select, default to 0x77, A1 and A0 are grouped into 4 I2C addresses.
   * @n             | A0 | A1 |
   * @n             | 0  | 0  |    0x74
   * @n             | 0  | 1  |    0x75
   * @n             | 1  | 0  |    0x76
   * @n             | 1  | 1  |    0x77   default i2c address  
-  * @n Experimental phenomenon: can see the current board temperature through serial port printing
+  * @n Experimental phenomenon: view the current board temperature through serial port printing
   * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   * @license     The MIT License (MIT)
   * @author      PengKaixing(kaixing.peng@dfrobot.com)
@@ -29,7 +29,7 @@
 */
 #include "DFRobot_MultiGasSensor.h"
 
-//Turn on by default, using I2C communication at the time, use software serial port communication after turning off
+//Turn on by default, using I2C communication at the time, switch to software serial port communication after turning off
 #define I2C_COMMUNICATION
 
 #ifdef  I2C_COMMUNICATION
@@ -59,7 +59,7 @@ void setup() {
   Serial.begin(115200);
   
 /**
-  Sensor init, used to init serial port or I2C, depending on the communication mode currently used
+  Sensor init, init serial port or I2C, depending on the communication mode currently used
 */
   while(!gas.begin())
   {
@@ -79,7 +79,7 @@ void setup() {
 void loop() {
 /**
   Print the board temperature as float type
-  Print after 1s delay each time
+  Print with 1s delay each time
 */
   Serial.print("The board temperature is: ");
   Serial.print(gas.readTempC());
