@@ -85,7 +85,7 @@ Download the zip file first to use this library and uncompress it to a folder na
   /**
    * @fn readTempC
    * @brief Get sensor onboard temperature
-   * @return float type, indicating return the current onboard temperature
+   * @return float type, indicating return the current board temperature
    */
   float readTempC(void);
 
