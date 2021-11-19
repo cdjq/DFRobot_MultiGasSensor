@@ -3,7 +3,7 @@
   * @brief Obtain gas concentration corresponding to the current environment, output as concentration value
   * @n Experimental mode: connect sensor communication pin to the main controller and burn
   * @n Communication mode select, DIP switch SEL: 0: I2C, 1: UART
-  * @n Set serial number         address in the set
+  * @n Set serial number         Address in the set
   * @n A0 A1 DIP level 00    01    10    11
   * @n 1            0x60  0x61  0x62  0x63
   * @n 2            0x64  0x65  0x66  0x67
