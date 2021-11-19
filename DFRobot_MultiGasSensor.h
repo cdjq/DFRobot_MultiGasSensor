@@ -53,12 +53,12 @@ typedef struct
 /**
  * @struct sAllData_t
  * @brief The struct used when getting all the data
- * @note Copy the description about the register from datasheet.
- * @n --------------------------------------------------------------------------------------------------------
- * @n |  byte0   | byte1 |    byte2     |    byte3      |  byte4   |  byte5   |  byte6   |   byte7   |  byte8   
- * @n --------------------------------------------------------------------------------------------------------
+ * @note 
+ * @n -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * @n |  byte0          | byte1    |          byte2             |        byte3                |  byte4   |  byte5         |  byte6                 |   byte7               |  byte8   
+ * @n -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * @n |  Protocol Head  | Command  | Gas Concentrate High 8-bit | Gas Concentration Low 8-bit | Gas Type | Decimal Digits | Temperature High 8-bit | Temperature Low 8-bit |  CRC
- * @n --------------------------------------------------------------------------------------------------------
+ * @n -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  */
 typedef struct
 {
@@ -76,7 +76,7 @@ extern sAllData_t AllData;
 
 /**
  * @struct sAllDataAnalysis_t
- * @brief All the data parsed
+ * @brief All the parsed data 
  */
 typedef struct
 {
@@ -91,7 +91,7 @@ class DFRobot_GAS
 public:
   /**
    * @enum eMethod_t
-   * @brief The sensor upload data type
+   * @brief Type of the data the sensor uploads
    */
   typedef enum
   {
@@ -165,7 +165,7 @@ public:
 
   /**
    * @fn readGasConcentrationPPM
-   * @brief Get gas concentration from sensor, unit is PPM
+   * @brief Get gas concentration from sensor, unit PPM
    * @return float type, indicating return gas concentration, if data is transmitted normally, return gas concentration, otherwise, return 0.0
    */
   float readGasConcentrationPPM(void);
@@ -201,8 +201,8 @@ public:
 
   /**
    * @fn setTempCompensation
-   * @brief Set whether to turn on temperature compensation, values output by sensor under different temperatures have differences.
-   * @n     To get more accurate gas concentration, temperature compensation needs adding when calculating gas concentration.
+   * @brief Set whether to turn on temperature compensation, values output by sensor under different temperatures are various.
+   * @n     To get more accurate gas concentration, temperature compensation is necessary when calculating gas concentration.
    * @param tempswitch Whether to turn on temperature compensation
    * @n             ON Turn on temperature compensation
    * @n            OFF Turn off temperature compensation
@@ -213,8 +213,8 @@ public:
    * @fn readVolatageData
    * @brief Get sensor gas concentration output by original voltage, which is different from reading sensor register directly.
    * @n     The function is mainly for detecting whether the read gas concentration is right.
-   * @param vopin Receive the pin output by sensor probe original voltage
-   * @return float type, indicating return the original voltage output sensor gas concentration
+   * @param vopin Pin for receiving the original voltage output from sensor probe
+   * @return Float type, indicating return the original voltage output of sensor gas concentration
    */
   float readVolatageData(uint8_t vopin);
 
@@ -230,16 +230,16 @@ public:
   /**
    * @fn getSensorVoltage
    * @brief Get voltage output by sensor probe (for calculating the current gas concentration)
-   * @return float type, indicating return voltage
+   * @return float type, indicating return voltage value
    */
   float getSensorVoltage(void);
 
   /**
    * @fn dataIsAvailable
    * @brief Call this function in active mode to determine the presence of data on data line
-   * @return bool type, indicating whether the sensor has uploaded data
+   * @return bool type, indicating whether there is data coming from the sensor 
    * @retval True Has uploaded data
-   * @retval False Not uploaded data
+   * @retval False No data uploaded
    */
   virtual bool dataIsAvailable(void) = 0;
 
@@ -268,7 +268,7 @@ protected:
    * @fn readData
    * @brief Get the data with specified length from the specified sensor
    * @param Reg Register address to be read
-   * @param Data Read the position storing register data
+   * @param Data Position of the data stored in the register to be read 
    * @param len Length of the data to be written
    */
   virtual int16_t readData(uint8_t Reg, uint8_t *Data, uint8_t len) = 0;
