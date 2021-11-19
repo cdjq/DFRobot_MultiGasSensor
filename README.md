@@ -3,7 +3,7 @@
 
 ## DFRobot_MultiGasSensor Library for Arduino
 ---------------------------------------------------------
-Gas sensors are widely applied to many fields such as gas research, environmental detection, production safety monitoring, dissolved gas analysis, pollution source/outlet law research, detection of toxic and harmful and combustible gas, laboratory or on-site simple gas analysis and testing, etc. This Multi-gas Sensor integrates a variety of gas probes, making it can be used in various applications.
+Gas sensors are widely applied to many fields such as gas research, environmental detection, production safety monitoring, dissolved gas analysis, pollution source/outlet law research, detection of toxic and harmful and combustible gas, laboratory or on-site simple gas analysis and testing, etc. This Multi-gas Sensor can be used with a variety of gas probes to detect hazardous gas concentration.
 ![正反面svg效果图](./resources/images/DFR0784svg1.png)
 
 ## Product Link（链接到中文商城）
@@ -43,7 +43,7 @@ Download the zip file first to use this library and uncompress it to a folder na
 
   /**
    * @fn changeAcquireMode
-   * @brief Change acquiring mode of sensor data
+   * @brief Change sensor data acquiring mode
    * @param mode Mode select
    * @n     INITIATIVE The sensor proactively reports data
    * @n     PASSIVITY The main controller needs to request data from sensor
@@ -55,7 +55,7 @@ Download the zip file first to use this library and uncompress it to a folder na
 
   /**
    * @fn readGasConcentrationPPM
-   * @brief Get gas concentration from sensor, unit is PPM
+   * @brief Get gas concentration from sensor, unit PPM
    * @return float type, indicating return gas concentration, if data is transmitted normally, return gas concentration, otherwise, return 0.0
    */
   float readGasConcentrationPPM(void);
@@ -91,8 +91,8 @@ Download the zip file first to use this library and uncompress it to a folder na
 
   /**
    * @fn setTempCompensation
-   * @brief Set whether to turn on temperature compensation, values output by sensor under different temperatures have differences.
-   * @n     To get more accurate gas concentration, temperature compensation needs adding when calculating gas concentration.
+   * @brief Set whether to turn on temperature compensation, values output by sensor under different temperatures are various.
+   * @n     To get more accurate gas concentration, temperature compensation are necessary when calculating gas concentration.
    * @param tempswitch Whether to turn on temperature compensation
    * @n             ON Turn on temperature compensation
    * @n            OFF Turn off temperature compensation
@@ -103,8 +103,8 @@ Download the zip file first to use this library and uncompress it to a folder na
    * @fn readVolatageData
    * @brief Get sensor gas concentration output by original voltage, which is different from reading sensor register directly.
    * @n     The function is mainly for detecting whether the read gas concentration is right.
-   * @param vopin Receive the pin output by sensor probe original voltage
-   * @return float type, indicating return the original voltage output sensor gas concentration
+   * @param vopin Pin for receiving the original voltage output from sensor probe 
+   * @return float type, indicating return the original voltage output of sensor gas concentration
    */
   float readVolatageData(uint8_t vopin);
 
@@ -127,9 +127,9 @@ Download the zip file first to use this library and uncompress it to a folder na
   /**
    * @fn dataIsAvailable
    * @brief Call this function in active mode to determine the presence of data on data line
-   * @return bool type, indicating whether the sensor has uploaded data
+   * @return bool type, indicating whether there is data coming from sensor
    * @retval True Has uploaded data
-   * @retval False Not uploaded data 
+   * @retval False No data uploaded 
    */
   virtual bool dataIsAvailable(void) = 0;
 
