@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 '''
   @file  change_sensor_iic_addr.py
-  @brief Change i2c address set
+  @brief Change i2c address group
   @n Experimental mode: connect sensor communication pin to the main controller and burn
   @n Communication mode select, DIP switch SEL: 0: I2C, 1: UART
   @n Group serial number         Address in the group
