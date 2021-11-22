@@ -18,8 +18,8 @@ import math
 import RPi.GPIO as GPIO
 
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)  #显示所有的打印信息
-#logger.setLevel(logging.FATAL)#如果不想显示过多打印，只打印错误，请使用这个选项
+logger.setLevel(logging.INFO)  #Display all the print information
+#logger.setLevel(logging.FATAL)#Use this option if you don't want to display too many prints but only printing errors
 ph = logging.StreamHandler()
 formatter = logging.Formatter("%(asctime)s - [%(filename)s %(funcName)s]:%(lineno)d - %(levelname)s: %(message)s")
 ph.setFormatter(formatter) 
@@ -34,10 +34,10 @@ tempSwitch = 0
 temp = 0.0
 def fuc_check_sum(i,ln):
   '''!
-    @brief CRC校验函数
-    @param i  CRC原始数据列表
-    @param ln 长度
-    @return CRC校验值
+    @brief CRC check funciton
+    @param i  CRC original data list
+    @param ln Length
+    @return CRC check value
   '''
   tempq=0
   for j in range(1,ln-1):
@@ -47,20 +47,20 @@ def fuc_check_sum(i,ln):
 
 def clear_buffer(buf,length):
   '''!
-    @brief 列表数值置为0
-    @param buf 等待清空的列表
-    @param length 长度
+    @brief List values are reset
+    @param buf List to be cleared
+    @param length Length
   '''
   for i in range(0,length):
     buf[i]=0
 
 class DFRobot_MultiGasSensor(object):
   '''!
-    @brief 这是一个用于复杂环境中检测多种气体的传感器父类
-    @details 用于检测 O2 CO H2S NO2 O3 CL2 NH3 H2 HCL
-    @n       SO2 HF PH3等气体。只需要硬件切换对应的探头
-    @n       就可以了。同时支持气体高阈值或者低阈值报警
-    @n       功能
+    @brief This is a sensor parent class which can be used in complex environments to detect various gases.
+    @details To detect gases like O2, CO, H2S, NO2, O3, CL2, NH3, H2, HCL, 
+    @n       SO2, HF, PH3, which is achieved by just switching corresponding probes.
+    @n       Meanwihle, it supports gas high/low threshold alarm.
+    @n       Function
   '''  
   INITIATIVE =  0x03
   PASSIVITY  =  0x04
@@ -100,17 +100,17 @@ class DFRobot_MultiGasSensor(object):
 
   def analysis_all_data(self,recv):
     '''!
-      @brief   解析获取到的数据列表
-      @param recv 获取到的数据
+      @brief   The obtained data list by parsing.
+      @param recv The obtained data
     '''    
-    #recv[5]表示的是分辨率，0表示分辨率为：1，1表示分辨率为：0.1，2表示分辨率为：0.01
+    #recv[5]Indicate resolution, 0 indicate resolution is 1, 1 indicate resolution is 0.1, 2 indicate resolution is 0.01
     if(recv[5]==0):
       self.gasconcentration = (recv[2] << 8) + recv[3]
     elif(recv[5]==1):
       self.gasconcentration = 0.1*((recv[2] << 8) + recv[3])
     elif(recv[5]==2):
       self.gasconcentration = 0.01*((recv[2] << 8) + recv[3]) 
-    #recv[4]表示的是探头类型
+    #recv[4]Indicate probe type
     if recv[4]==0x05:
       self.gastype = "O2"
     elif recv[4]==0x04:
@@ -216,11 +216,11 @@ class DFRobot_MultiGasSensor(object):
     
   def change_acquire_mode(self,mode):
     '''!
-      @brief 改变传感器采集到气体以后数据上报到主控的方式
-      @param mode 模式选择
-      @n     INITIATIVE 传感器主动上报
-      @n     PASSIVITY 主控发送请求，传感器才能上报数据
-      @return 返回改变气体模式是否成功
+      @brief Change the mode of reporting data to the main controller after the sensor has collected the gas.
+      @param mode Mode select
+      @n     INITIATIVE The sensor proactively reports data
+      @n     PASSIVITY The sensor can report data only after the main controller sends request to it.
+      @return Return whether the change of gas mode succeed
       @retval True   change success
       @retval False  change fail
     '''
@@ -243,8 +243,8 @@ class DFRobot_MultiGasSensor(object):
 
   def read_gas_concentration(self):
     '''!
-      @brief 获取传感器获取的气体浓度或者气体的类型
-      @return 如果数据传输正常，那么返回气体浓度；否则，返回0xffff
+      @brief Get the gas concentration or type obtained by the sensor
+      @return if data is transmitted normally, return gas concentration; otherwise, return 0xffff
     '''  
     global sendbuf
     global recvbuf    
@@ -265,7 +265,7 @@ class DFRobot_MultiGasSensor(object):
       Con=((recvbuf[2]<<8)+recvbuf[3])*1.0
     else:
       return 0.0 
-    #recv[4]表示的是探头类型
+    #recv[4] Indicate probe type
     if recvbuf[4]==0x05:
       self.gastype = "O2"
     elif recvbuf[4]==0x04:
@@ -374,8 +374,8 @@ class DFRobot_MultiGasSensor(object):
 
   def read_gas_type(self):
     '''!
-      @brief 获取传感器获取气体的类型
-      @return 气体类型
+      @brief Get the gas type obtained by the sensor
+      @return Gas type
       @n  O2   0x05
       @n  CO   0x04
       @n  H2S  0x03
@@ -409,13 +409,13 @@ class DFRobot_MultiGasSensor(object):
     
   def set_threshold_alarm(self,switchof,threshold,gasType):
     '''!
-      @brief 设置传感器报警的阈值
-      @param switchof 设置是否打开报警
-      @n        ON    打开报警功能
-      @n        OFF   关闭报警功能
-      @param threshold 设置报警的阈值
-      @param gasType 气体类型
-      @return 设置阈值报警是否成功
+      @brief Set sensor alarm threshold
+      @param switchof Set whether to turn on alarm function
+      @n        ON    Turn on alarm function
+      @n        OFF   Turn off alarm function
+      @param threshold Set alarm threshold
+      @param gasType Gas type
+      @return Whether setting threshold alarm succeed
       @retval True   change success
       @retval False  change fail
     '''  
@@ -459,8 +459,8 @@ class DFRobot_MultiGasSensor(object):
 
   def read_temp(self):
     '''!
-      @brief 获取传感器的板载温度
-      @return 板子温度 单位为摄氏度
+      @brief Get sensor onboard temperature
+      @return Board temperature, unit °C
     '''
     clear_buffer(recvbuf,9)
     sendbuf[0]=0xff
@@ -483,21 +483,21 @@ class DFRobot_MultiGasSensor(object):
     
   def set_temp_compensation(self,tempswitch):
     '''!
-      @brief 设置是否开启温度补偿，传感器在不同温度下的输出值会有差别，所以
-      @n     为了获取到的气体浓度更精确，在计算气体浓度的时候需要增加温度补偿
-      @param tempswitch 温度补偿开关
-                   ON  打开温度补偿
-                   OFF 关闭温度补偿
+      @brief Set whether to turn on temperature compensation, values output by sensor under different temperatures are various.
+      @n     To get more accurate gas concentration, temperature compensation are necessary when calculating gas concentration.
+      @param tempswitch Temperature compensation switch
+                   ON  Turn on temperature compensation
+                   OFF Turn off temperature compensation
     '''  
     tempSwitch = tempswitch
     temp = self.read_temp()
     
   def read_volatage_data(self):
     '''!
-      @brief 获取传感器气体浓度以原始电压输出，不同于直接读取传感器寄存器，这
-      @n     个函数主要用来检验读取的气体浓度是否准确
-      @param  vopin 用来接收传感器探头原始电压输出的引脚
-      @return 传感器气体浓度的原始电压输出
+      @brief Get sensor gas concentration output by original voltage, which is different from reading sensor register directly.
+      @n     The function is mainly for detecting whether the read gas concentration is right.
+      @param  vopin Pin for receiving the original voltage output from sensor probe
+      @return The original voltage output of sensor gas concentration
     '''
     clear_buffer(recvbuf,9)
     sendbuf[0]=0xff
@@ -519,8 +519,8 @@ class DFRobot_MultiGasSensor(object):
 
   def change_i2c_addr_group(self,group):
     '''!
-      @brief 改变IIC地址组
-      @param  group 想要使传感器变成的组号
+      @brief Change I2C address group
+      @param  group The group number that the sensor is supposed to be
     '''   
     global sendbuf
     global recvbuf
@@ -551,8 +551,8 @@ class DFRobot_MultiGasSensor_I2C(DFRobot_MultiGasSensor):
 
   def data_is_available(self):
     '''
-      * @brief IIC在主动模式下调用此函数，用以判断数据线上有没有数据
-      * @return 传感器是否有数据上传
+      * @brief Call this function in I2C active mode to determine the presence of data on data line
+      * @return Whether data from sensor is available
       * @retval True  success is Available
       * @retval False  error is unavailable
       *
@@ -617,8 +617,8 @@ class DFRobot_MultiGasSensor_UART(DFRobot_MultiGasSensor):
     
   def data_is_available(self):  
     '''
-      *@brief uart在主动模式下调用此函数，用以判断数据线上有没有数据
-      *@return 传感器是否有数据上传
+      *@brief Call this function in Uart active mode to determine the presence of data on data line
+      *@return Whether data from sensor is available
       *@retval  True  success is Available
       *@retval  False  error is unavailable
     '''    
