@@ -34,7 +34,7 @@ tempSwitch = 0
 temp = 0.0
 def fuc_check_sum(i,ln):
   '''!
-    @brief CRC check funciton
+    @brief CRC check function
     @param i  CRC original data list
     @param ln Length
     @return CRC check value
