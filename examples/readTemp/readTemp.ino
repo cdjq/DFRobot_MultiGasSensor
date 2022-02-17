@@ -53,22 +53,17 @@
 #endif
 
 void setup() {
-/**
-  Serial port init for viewing printing output
-*/
+  //Serial port init for viewing printing output
   Serial.begin(115200);
   
-/**
-  Sensor init, init serial port or I2C, depending on the communication mode currently used
-*/
+  //Sensor init, init serial port or I2C, depending on the communication mode currently used
   while(!gas.begin())
   {
     Serial.println("NO Deivces !");
     delay(1000);
   }
-/**
-  Mode of obtaining data: the main controller needs to request the sensor for data
-*/
+
+  //Mode of obtaining data: the main controller needs to request the sensor for data
   while (!gas.changeAcquireMode(gas.PASSIVITY))
   {
     delay(1000);
@@ -77,10 +72,10 @@ void setup() {
 }
 
 void loop() {
-/**
-  Print the board temperature as float type
-  Print with 1s delay each time
-*/
+  /**
+   *Print the board temperature as float type
+   *Print with 1s delay each time
+   */
   Serial.print("The board temperature is: ");
   Serial.print(gas.readTempC());
   Serial.println(" ℃");

@@ -1,12 +1,11 @@
 # DFRobot_MultiGasSensor
 - [中文版](./README_CN.md)
 
-## DFRobot_MultiGasSensor Library for Arduino
----------------------------------------------------------
 Gas sensors are widely applied to many fields such as gas research, environmental detection, production safety monitoring, dissolved gas analysis, pollution source/outlet law research, detection of toxic and harmful and combustible gas, laboratory or on-site simple gas analysis and testing, etc. This Multi-gas Sensor can be used with a variety of gas probes to detect hazardous gas concentration.
-![正反面svg效果图](./resources/images/DFR0784svg1.png)
+![正反面svg效果图](../../resources/images/DFR0784.png)
 
 ## Product Link（链接到中文商城）
+
 SKU：DFR0784
 
 ## Table of Contents
@@ -164,8 +163,6 @@ Download the zip file first to use this library and uncompress it to a folder na
   def read_volatage_data(self): 
         
 ```
-
-
 ## Compatibility
 
 | Mainboard         | Pass | Miss | No Test | Note |
@@ -180,10 +177,10 @@ Download the zip file first to use this library and uncompress it to a folder na
 | ------- | :--: | :----: | :----: | ---- |
 | Python2 |  √   |        |        |      |
 | Python3 |  √   |        |        |      |
+
 ## History
 
 - 02,04, 2021 - Version 2.0 released.
-
 
 ## Credits
 

@@ -53,28 +53,22 @@ DFRobot_GAS_HardWareUart gas(&Serial2); //ESP32HardwareSerial
 #endif
 
 void setup() {
-/**
-  Serial port init for viewing print output
-*/
+  //Serial port init for viewing print output
   Serial.begin(115200);
   
-/**
-  Sensor init, init serial port or I2C, depending on the communication mode currently used
-*/
+  //Sensor init, init serial port or I2C, depending on the communication mode currently used
   while(!gas.begin())
   {
     Serial.println("NO Deivces !");
     delay(1000);
   }
-/**
-  Turn on temperature compensation: gas.ON : turn on
-               gas.OFF：turn off
-*/
+  /**
+   *Turn on temperature compensation: gas.ON :turn on
+   *                                  gas.OFF:turn off
+   */
   gas.setTempCompensation(gas.ON);
-  
-/**
-  Mode of obtaining data: the sensor proactively reports data
-*/
+
+  //Mode of obtaining data: the sensor proactively reports data
   gas.changeAcquireMode(gas.INITIATIVE);
   delay(1000);
 }

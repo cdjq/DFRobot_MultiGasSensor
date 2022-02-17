@@ -45,18 +45,14 @@ uint8_t scan()
 void setup() {
   Serial.begin(115200);
   gas.setI2cAddr(scan());
-/**
-  Sensor init, init serial port or I2C, depending on the communication mode currently used
-*/
+  //Sensor init, init serial port or I2C, depending on the communication mode currently used
   while(!gas.begin())
   {
     Serial.println("NO Deivces !");
     delay(1000);
   }
 
-/**
-  Change i2c address group
-*/
+  //Change i2c address group
   while(gas.changeI2cAddrGroup(3)==0)
   {
     Serial.println("IIC addr change fail!");

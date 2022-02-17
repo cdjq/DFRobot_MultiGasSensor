@@ -36,8 +36,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath
 from DFRobot_MultiGasSensor import *
 
 '''
-  ctype=1：UART
-  ctype=0：IIC
+  ctype=1:UART
+  ctype=0:IIC
 '''
 ctype=0
 
@@ -51,9 +51,9 @@ else:
 def setup():
   #Mode of obtaining data: the main controller needs to request the sensor for data
   while (False == gas.change_acquire_mode(gas.PASSIVITY)):
-    print("wait acquire mode success!");
+    print("wait acquire mode success!")
     time.sleep(1)
-  print("change acquire mode success!");
+  print("change acquire mode success!")
   gas.set_temp_compensation(gas.ON)
   time.sleep(1)
   

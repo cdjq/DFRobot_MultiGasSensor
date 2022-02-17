@@ -6,9 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 DFRobot_MultiGasSensor_I2C	KEYWORD1
-
 DFRobot_MultiGasSensor_HardWareUart	KEYWORD1
-
 DFRobot_MultiGasSensor_SoftWareUart	KEYWORD1
 
 #######################################

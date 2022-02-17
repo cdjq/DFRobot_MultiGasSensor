@@ -53,14 +53,10 @@
 #endif
 
 void setup() {
-/**
-  Serial port init for viewing printing output
-*/
+  //Serial port init for viewing printing output
   Serial.begin(115200);
 
-/**
-  Sensor init, used to init serial port or I2C, depending on the communication mode currently used
-*/
+  //Sensor init, used to init serial port or I2C, depending on the communication mode currently used
   while(!gas.begin())
   {
     Serial.println("NO Deivces !");
@@ -68,25 +64,23 @@ void setup() {
   }
   Serial.println("The device is connected successfully!");
 
-/**
-  Mode of obtaining data: the main controller needs to request the sensor for data
-*/
+  //Mode of obtaining data: the main controller needs to request the sensor for data
   gas.changeAcquireMode(gas.PASSIVITY);
   delay(1000);
 
-/**
-  Turn on temperature compensation: gas.ON : turn on
-               gas.OFF：turn off
-*/
+  /**
+   *Turn on temperature compensation: gas.ON : turn on
+   *             gas.OFF：turn off
+   */
   gas.setTempCompensation(gas.ON);
 }
 
 void loop() {
-/**
-  Fill in the parameter readGasConcentration() with the type of gas to be obtained and print
-  The current gas concentration
-  Print with 1s delay each time
-*/
+  /**
+   *Fill in the parameter readGasConcentration() with the type of gas to be obtained and print
+   *The current gas concentration
+   *Print with 1s delay each time
+   */
   Serial.print("Ambient ");
   Serial.print(gas.queryGasType());
   Serial.print(" concentration is: ");

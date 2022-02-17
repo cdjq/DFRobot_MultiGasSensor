@@ -53,22 +53,17 @@
 #endif
 
 void setup() {
-/**
-  Serial port init for viewing printing output
-*/
+  //Serial port init for viewing printing output
   Serial.begin(115200);
   
-/**
-  Sensor init, init serial port or I2C, depending on the communication mode currently used
-*/
+  //Sensor init, init serial port or I2C, depending on the communication mode currently used
   while(!gas.begin())
   {
     Serial.println("NO Deivces !");
     delay(1000);
   }
-/**
-  Mode of obtaining data: the main controller needs to request the sensor for data
-*/
+
+  //Mode of obtaining data: the main controller needs to request the sensor for data
   while (!gas.changeAcquireMode(gas.PASSIVITY))
   {
     delay(1000);
@@ -77,11 +72,11 @@ void setup() {
 }
 
 void loop() {
-/**
-  Fill in readVolatageData() with the analog pin that actually connect to the sensor's pin A0 
-  See the current voltage output by sensor in the serial port (analog value has been converted to voltage value)
-  Print with 1s delay each time
-*/
+  /**
+   *Fill in readVolatageData() with the analog pin that actually connect to the sensor's pin A0
+   *See the current voltage output by sensor in the serial port (analog value has been converted to voltage value)
+   * Print with 1s delay each time
+   */
   Serial.print("Sensor output voltage is: ");
   Serial.print(gas.getSensorVoltage());
   Serial.println(" V");

@@ -41,8 +41,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath
 from DFRobot_MultiGasSensor import *
 
 '''
-  ctype=1：UART
-  ctype=0：IIC
+  ctype=1:UART
+  ctype=0:IIC
 '''
 ctype=1
 

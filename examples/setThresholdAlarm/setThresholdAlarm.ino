@@ -53,38 +53,28 @@
 #endif
 #endif
 
-/**
-  Set the main controller pin connected to alarm pin
-*/
+//Set the main controller pin connected to alarm pin
 #define ALA_pin 3
 
 void setup() {
-/**
-  Serial port init for viewing printing output
-*/
+  //Serial port init for viewing printing output
   Serial.begin(115200);
   
-/**
-  Sensor init, init serial port or I2C, depending on the communication mode currently used
-*/
+  //Sensor init, init serial port or I2C, depending on the communication mode currently used
   while(!gas.begin())
   {
     Serial.println("NO Deivces !");
     delay(1000);
   }
-/**
-  Mode of obtaining data: the main controller needs to request the sensor for data
-*/
+
+  //Mode of obtaining data: the main controller needs to request the sensor for data
   while (!gas.changeAcquireMode(gas.PASSIVITY))
   {
     delay(1000);
   }
   Serial.println("change acquire mode success!");
 
-
-/**
-  Set sensor alarm threshold
-*/
+  //Set sensor alarm threshold
   while (!gas.setThresholdAlarm(/*Whether to enable threshold alarm*/ gas.ON, 200, gas.LOW_THRESHOLD_ALA,gas.queryGasType()))
   {
     Serial.println("Failed to open alarm!");
@@ -94,9 +84,7 @@ void setup() {
 }
 
 void loop() {
-/**
-  Repeatedly obtain the ambient gas concentration and the alarm triggers when it reaches the threshold.
-*/
+  //Repeatedly obtain the ambient gas concentration and the alarm triggers when it reaches the threshold.
   gas.readGasConcentrationPPM();
   if (digitalRead(ALA_pin) == 1)
   {

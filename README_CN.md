@@ -1,35 +1,33 @@
 # DFRobot_MultiGasSensor
 - [English Version](./README.md)
 
-## DFRobot_MultiGasSensor Library for Arduino
----------------------------------------------------------
 气体传感器广泛应用在气体研究，环境检测，生产安全监测，溶解气体分析，污染源/排放口规律研究，有毒有害，可燃气体检测报警，化验室或现场简单气体分析测试等方面，这款气体传感器更是集成了多种气体探头的一个多气体传感器，可以适用于各种各样的应用场景
-![正反面svg效果图](./resources/images/DFR0784svg1.png)
+![正反面svg效果图](./resources/images/DFR0784.png)
 
-## Product Link（链接到中文商城）
+## 产品链接(https://www.dfrobot.com/)
+
 SKU：DFR0784
 
-## Table of Contents
+## 目录
 
-* [Summary](#summary)
-* [Installation](#installation)
-* [Methods](#methods)
-* [Compatibility](#compatibility)
-* [History](#history)
-* [Credits](#credits)
+* [概述](#概述)
+* [库安装](#库安装)
+* [方法](#方法)
+* [兼容性](#兼容性y)
+* [历史](#历史)
+* [创作者](#创作者)
 
-## Summary
+## 概述
 
 这是一个用于复杂环境中检测多种气体的传感器，支持O2 CO H2S 
 NO2 O3 CL2 NH3 H2 HCL SO2 HF PH3等气体。只需要硬件切换对应
 的探头就可以了。同时支持气体高阈值或者低阈值报警功能
 
-## Installation
+## 库安装
 
-To use this library download the zip file, uncompress it to a folder named DFRobot_MultiGasSensor.
-Download the zip file first to use this library and uncompress it to a folder named DFRobot_MultiGasSensor.
+使用此库前，请首先下载库文件，将其粘贴到\Arduino\libraries目录中，然后打开examples文件夹并在该文件夹中运行演示。
 
-## Methods
+## 方法
 
 ```C++
   /**
@@ -144,9 +142,9 @@ Download the zip file first to use this library and uncompress it to a folder na
    */
   bool changeI2cAddrGroup(uint8_t group);
 ```
-## Compatibility
+## 兼容性
 
-MCU                | Work Well | Work Wrong | Untested  | Remarks
+主板               | 通过  | 未通过   | 未测试   | 备注
 ------------------ | :----------: | :----------: | :---------: | -----
 FireBeetle-ESP32  |      √       |             |            | 
 FireBeetle-ESP8266|      √       |              |             | 
@@ -156,11 +154,10 @@ Leonardo  |      √       |              |             |
 Micro：bit  |      √       |              |             | 
 M0  |      √       |              |             | 
 
-## History
+## 历史
 
-- 02,04, 2021 - Version 2.0 released.
+- 2021/4/2 - 2.0.0 版本
 
-
-## Credits
+## 创作者
 
 Written by PengKaixing(kaixing.peng@dfrobot.com), 2021. (Welcome to our [website](https://www.dfrobot.com/))
